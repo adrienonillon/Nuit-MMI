@@ -25,21 +25,21 @@ export default function SiteRestaure() {
 
         <section aria-label="Site restauré" className="flex flex-col items-center gap-14 overflow-hidden px-4 pb-16 pt-16 md:px-[130px] lg:flex-row lg:gap-[72px] lg:pb-[96px] lg:pt-[40px]">
           <CanevasAEchelle largeur={600} hauteur={330} className="shrink-0 overflow-visible lg:w-[600px]">
-            <motion.div className="logo-cligne absolute left-0 top-[14px] h-[302.945px] w-[600px]" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
+            <motion.div className="logo-cligne absolute left-0 top-[14px] h-[302.945px] w-[600px]" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
               <Logo className="h-full w-full" />
             </motion.div>
             <motion.div
               className="absolute left-[459px] top-[-56px] flex size-[150px] flex-col items-center justify-center gap-1 rounded-full bg-grisnoir text-jaune"
               initial={{ scale: 3, rotate: -40, opacity: 0 }}
               animate={{ scale: 1, rotate: -6, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 16, delay: 0.7 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 16, delay: 0.3 }}
             >
               <span className="font-shoulders text-[35px] font-black leading-none">SAUVÉ</span>
               <span className="font-courier text-[18px] font-bold">merci à vous</span>
             </motion.div>
           </CanevasAEchelle>
 
-          <motion.div className="w-full flex-1" initial={{ opacity: 0, x: 80, rotate: 6 }} animate={{ opacity: 1, x: 0, rotate: 1.4 }} transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}>
+          <motion.div className="w-full flex-1" initial={{ opacity: 0, x: 80, rotate: 6 }} animate={{ opacity: 1, x: 0, rotate: 1.4 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
             <div className="flex flex-col gap-[18px] bg-blanc p-6 shadow-[0_22px_40px_-24px_rgba(13,13,18,0.45)] md:p-9">
               <h1 className="flex flex-wrap items-center gap-x-3 gap-y-1 leading-tight text-bleu" style={{ fontSize: 'clamp(38px, 4.17vw, 60px)' }}>
                 <span className="font-bodoni font-extrabold italic">La</span>

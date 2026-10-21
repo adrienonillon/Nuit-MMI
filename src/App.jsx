@@ -20,9 +20,10 @@ function AccesProtege({ children }) {
 }
 
 // Fondu entre les pages.
-function Page({ children }) {
+// sortieDirecte : pas de fondu de sortie (la page piratée finit déjà couverte de blanc par le dépiratage).
+function Page({ children, sortieDirecte = false }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: sortieDirecte ? 0 : 0.18 } }} transition={{ duration: 0.18 }}>
       {children}
     </motion.div>
   )
@@ -35,7 +36,7 @@ export default function App() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Page><SitePirate /></Page>} />
+        <Route path="/" element={<Page sortieDirecte><SitePirate /></Page>} />
         <Route path="/restaure" element={<AccesProtege><Page><SiteRestaure /></Page></AccesProtege>} />
         <Route path="/accueil" element={<AccesProtege><Page><Accueil /></Page></AccesProtege>} />
         <Route path="/reglement" element={<AccesProtege><Page><Reglement /></Page></AccesProtege>} />
