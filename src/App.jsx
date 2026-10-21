@@ -5,9 +5,10 @@ import SitePirate from './pages/SitePirate.jsx'
 import SiteRestaure from './pages/SiteRestaure.jsx'
 import Accueil from './pages/Accueil.jsx'
 import Reglement from './pages/Reglement.jsx'
+import Projets from './pages/Projets.jsx'
 import { estDeverrouille } from './lib/acces.js'
 
-// Tout le site (restauré, accueil, règlement) n'est accessible qu'après le bon mot de passe.
+// Tout le site (restauré, accueil, projets, règlement) n'est accessible qu'après le bon mot de passe.
 function AccesProtege({ children }) {
   const [ok, setOk] = useState(null)
   useEffect(() => {
@@ -29,7 +30,7 @@ function Page({ children, sortieDirecte = false }) {
   )
 }
 
-// Parcours : site piraté → bon mot de passe → site restauré → accueil (+ règlement).
+// Parcours : site piraté → bon mot de passe → site restauré → accueil (+ projets, règlement).
 export default function App() {
   const location = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [location.pathname])
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/" element={<Page sortieDirecte><SitePirate /></Page>} />
         <Route path="/restaure" element={<AccesProtege><Page><SiteRestaure /></Page></AccesProtege>} />
         <Route path="/accueil" element={<AccesProtege><Page><Accueil /></Page></AccesProtege>} />
+        <Route path="/projets" element={<AccesProtege><Page><Projets /></Page></AccesProtege>} />
         <Route path="/reglement" element={<AccesProtege><Page><Reglement /></Page></AccesProtege>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

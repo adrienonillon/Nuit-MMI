@@ -8,7 +8,7 @@ import linkedin from '../assets/svg/linkedin.svg'
 import youtube from '../assets/svg/youtube.svg'
 
 const COLONNES = [
-  ['Le projet', [['Programme', '/accueil'], ['Règlement', '/reglement']]],
+  ['La Nuit', [['Accueil', '/accueil'], ['Projets', '/projets'], ['Règlement', '/reglement']]],
   ['Contact', [['contact@nuitmmi.fr', 'mailto:contact@nuitmmi.fr']]],
 ]
 const RESEAUX = [['Facebook', facebook, 'w-[14.5px]'], ['Twitter', twitter, 'w-[25px]'], ['Instagram', instagram, 'w-[25px]'], ['LinkedIn', linkedin, 'w-[25px]'], ['YouTube', youtube, 'w-[27.6px]']]

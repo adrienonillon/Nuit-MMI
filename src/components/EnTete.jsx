@@ -4,7 +4,7 @@ import { motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion
 import Logo from './Logo.jsx'
 import { EASE } from './Anime.jsx'
 
-const LIENS = [['Projet', '/accueil'], ['Règlement', '/reglement']]
+const LIENS = [['Accueil', '/accueil'], ['Projets', '/projets'], ['Règlement', '/reglement']]
 
 // Lien dont le texte « roule » vers le haut au survol.
 function TexteRoulant({ children }) {
@@ -16,7 +16,7 @@ function TexteRoulant({ children }) {
   )
 }
 
-// Barre de navigation des pages Projet / Règlement (wireframe « Structure Accueil »).
+// Barre de navigation des pages Accueil / Projets / Règlement (wireframe « Structure Accueil »).
 export default function EnTete() {
   const { scrollY, scrollYProgress } = useScroll()
   const progression = useSpring(scrollYProgress, { stiffness: 200, damping: 30 })
@@ -50,10 +50,10 @@ export default function EnTete() {
           </Link>
 
           <nav aria-label="Navigation principale">
-            <ul className="flex items-center gap-6 md:gap-[38px]">
+            <ul className="flex items-center gap-4 sm:gap-6 md:gap-[38px]">
               {LIENS.map(([libelle, vers]) => (
                 <li key={vers}>
-                  <NavLink to={vers} className="group relative block py-2 font-courier text-[14px] uppercase tracking-[0.99px] text-encre md:text-[16px]">
+                  <NavLink to={vers} className="group relative block py-2 font-courier text-[13px] uppercase tracking-[0.99px] text-encre sm:text-[14px] md:text-[16px]">
                     {({ isActive }) => (
                       <>
                         <TexteRoulant>{libelle}</TexteRoulant>

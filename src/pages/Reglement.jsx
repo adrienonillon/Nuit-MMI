@@ -28,16 +28,15 @@ const ARTICLES = [
     id: 'participants',
     titre: 'Participants & inscription',
     points: [
-      'La Nuit MMI est ouverte aux étudiants du département MMI, toutes années confondues.',
+      'La Nuit MMI est ouverte aux étudiants de BUT 2 et de BUT 3 du département MMI.',
       'L’inscription est gratuite et obligatoire, dans la limite des places disponibles.',
-      'Les mineurs doivent fournir une autorisation parentale signée avant le début de l’événement.',
     ],
   },
   {
     id: 'equipes',
     titre: 'Équipes',
     points: [
-      'Chaque équipe compte entre 4 et 6 membres. Le mélange des années et des profils (design, dev, com) est vivement encouragé.',
+      'Chaque équipe compte entre 4 et 6 membres. Le mélange des années (BUT 2 et BUT 3) et des profils (design, dev, com) est vivement encouragé.',
       'Une équipe peut être formée à l’avance ou constituée par l’organisation le jour J.',
       'La composition d’une équipe ne peut plus changer une fois le sujet révélé, sauf accord de l’organisation.',
     ],
@@ -64,9 +63,8 @@ const ARTICLES = [
     id: 'jury',
     titre: 'Jury & évaluation',
     points: [
-      'Chaque équipe présente son projet lors d’un pitch devant un jury composé d’enseignants et de professionnels.',
+      'Chaque équipe présente son projet lors d’un pitch devant un jury composé d’enseignants.',
       'Critères : pertinence par rapport au sujet, créativité, qualité de réalisation, travail d’équipe et qualité du pitch.',
-      'Les décisions du jury sont souveraines et sans appel.',
     ],
   },
   {
@@ -159,7 +157,7 @@ function Heros() {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-1"><path d="M12 5v14m0 0-6-6m6 6 6-6" stroke="#F3C137" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </a>
           <Link to="/accueil" className="flex items-center rounded-lg border border-bleu px-[18px] py-[9px] font-courier text-[18px] font-bold text-bleu transition-colors hover:bg-bleu hover:text-jaune md:text-[20px]">
-            Voir le projet
+            Retour à l’accueil
           </Link>
         </motion.div>
       </div>
