@@ -170,7 +170,6 @@ function Heros() {
         transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
         className="relative mx-auto aspect-[440/520] w-full max-w-[440px] overflow-hidden rounded-b-[27px] rounded-t-[240px] bg-bleu"
       >
-        <div aria-hidden="true" className="absolute left-1/2 top-[50%] size-[82%] -translate-x-1/2 -translate-y-1/2 animate-[spin_40s_linear_infinite] rounded-full border-2 border-dashed border-jaune/30" />
         <p className="absolute left-1/2 top-[8%] -translate-x-1/2 whitespace-nowrap font-courier text-[15px] font-bold tracking-[2.23px] text-jaune md:text-[17px]">LU & APPROUVÉ</p>
         <Suspense fallback={<img src={spookie} alt="" className="absolute inset-x-[10%] bottom-[12%] top-[16%] object-contain" />}>
           <Spookie3D className="absolute inset-x-0 bottom-[10%] top-[12%]" />

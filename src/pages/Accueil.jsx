@@ -73,8 +73,6 @@ function Heros() {
           transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
           className="relative mx-auto aspect-[626/632] w-full max-w-[626px] overflow-hidden rounded-b-[27px] rounded-t-[333px] bg-jaune"
         >
-          {/* Halo qui tourne derrière Spookie */}
-          <div aria-hidden="true" className="absolute left-1/2 top-[52%] size-[78%] -translate-x-1/2 -translate-y-1/2 animate-[spin_40s_linear_infinite] rounded-full border-2 border-dashed border-bleu/20" />
           <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.6 }} className="absolute left-1/2 top-[6.7%] -translate-x-1/2 font-courier text-[15px] font-bold tracking-[2.23px] text-bleu md:text-[18px]">EN ÉQUIPE</motion.p>
           <Suspense fallback={<img src={spookie} alt="" className="absolute left-[17.8%] top-[11.6%] h-[82.1%] w-[64.4%] object-contain object-bottom" />}>
             <Spookie3D className="absolute inset-x-0 bottom-[8%] top-[8%]" />
@@ -419,7 +417,7 @@ function Trophee() {
           <div aria-hidden="true" className="absolute inset-[12%] rounded-full bg-jaune/25 blur-3xl" />
           {proche && (
             <Suspense fallback={null}>
-              <Trophee3D className="absolute inset-0 blur-[18px] transition-[filter] duration-700 group-hover:blur-[11px]" />
+              <Trophee3D className="absolute inset-0 blur-[34px] transition-[filter] duration-700 group-hover:blur-[26px]" />
             </Suspense>
           )}
           <motion.span
