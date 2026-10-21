@@ -14,10 +14,10 @@ const STYLES = ['JB', 'NM', 'JT', 'BB', 'NA', 'PC']
 const COULEURS = ['#F3C137', '#F1F1F1', '#D4D4D4', '#F3C137']
 
 // Moments clés (en secondes)
-const T_LETTRES = 1.1
-const T_TAMPON = 1.8
-const T_SORTIE = 2.5
-const T_FIN = 2.8
+const T_LETTRES = 2.1
+const T_TAMPON = 3.2
+const T_SORTIE = 4.4
+const T_FIN = 4.75 // transition de fin courte : le cercle blanc puis directement le site restauré
 
 function Confettis() {
   const bouts = useMemo(
@@ -41,7 +41,7 @@ function Confettis() {
           style={{ width: b.w, height: b.h, background: b.c }}
           initial={{ x: 0, y: 0, rotate: 0, opacity: 0 }}
           animate={{ x: b.x, y: [0, b.y, b.y + 500], rotate: b.r, opacity: [1, 1, 0] }}
-          transition={{ duration: 1.4, delay: b.d, ease: 'easeOut', times: [0, 0.45, 1] }}
+          transition={{ duration: 2.2, delay: b.d, ease: 'easeOut', times: [0, 0.45, 1] }}
         />
       ))}
     </div>
@@ -55,7 +55,7 @@ export default function Depiratage({ code, onFin }) {
   const departs = useMemo(() => code.map(() => ({ x: (Math.random() - 0.5) * 900, y: (Math.random() - 0.5) * 700, rotate: Math.random() * 360 - 180 })), [code])
 
   useEffect(() => {
-    const barre = animate(0, 100, { duration: 0.7, delay: 0.3, ease: 'easeInOut', onUpdate: (v) => setPourcent(Math.round(v)) })
+    const barre = animate(0, 100, { duration: 1.6, delay: 0.9, ease: 'easeInOut', onUpdate: (v) => setPourcent(Math.round(v)) })
     const confettis = setTimeout(() => setFete(true), T_TAMPON * 1000)
     const fin = setTimeout(onFin, T_FIN * 1000)
     return () => { barre.stop(); clearTimeout(confettis); clearTimeout(fin) }
@@ -68,7 +68,7 @@ export default function Depiratage({ code, onFin }) {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-grisnoir px-4"
       initial={{ clipPath: 'inset(50% 0 50% 0)' }}
       animate={{ clipPath: 'inset(0% 0 0% 0)', x: [0, -16, 14, -9, 6, 0] }}
-      transition={{ clipPath: { duration: 0.3, ease: EASE }, x: { duration: 0.4, delay: T_TAMPON + 0.12 } }}
+      transition={{ clipPath: { duration: 0.45, ease: EASE }, x: { duration: 0.4, delay: T_TAMPON + 0.12 } }}
     >
       <span className="sr-only">Code correct : le site est en cours de restauration.</span>
 
@@ -81,7 +81,7 @@ export default function Depiratage({ code, onFin }) {
           style={{ top: `${15 + i * 21}%` }}
           initial={{ x: '-100%' }}
           animate={{ x: ['-100%', '30%', '100%'] }}
-          transition={{ duration: 0.35, delay: 0.05 + i * 0.05, ease: 'linear' }}
+          transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: 'linear' }}
         />
       ))}
 
@@ -96,7 +96,7 @@ export default function Depiratage({ code, onFin }) {
             key={l}
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15 + i * 0.15, duration: 0.2 }}
+            transition={{ delay: 0.35 + i * 0.3, duration: 0.25 }}
             className="py-1"
           >
             {l}
@@ -123,7 +123,7 @@ export default function Depiratage({ code, onFin }) {
             className="inline-block"
             initial={{ opacity: 0, ...departs[i], scale: 2 }}
             animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 16, delay: T_LETTRES + i * 0.03 }}
+            transition={{ type: 'spring', stiffness: 140, damping: 14, delay: T_LETTRES + i * 0.05 }}
           >
             <LettreDecoupee lettre={l} style={STYLES[i % STYLES.length]} rotation={i % 2 ? 3 : -3} taille={84} />
           </motion.span>

@@ -170,7 +170,7 @@ export default function SitePirate() {
       memoriserAcces(code)
       setMessage('')
       setReussi(true) // les fentes se verrouillent et sautent une à une…
-      setTimeout(() => setSequence(true), 450) // …puis la séquence de dépiratage
+      setTimeout(() => setSequence(true), 900) // …puis la séquence de dépiratage
       document.activeElement?.blur()
       return
     }
