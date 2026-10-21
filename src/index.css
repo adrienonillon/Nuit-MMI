@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-blanc text-bleu antialiased; overflow-x: hidden; }
+  :focus-visible { outline: 3px solid #F3C137; outline-offset: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@keyframes tremble {
+  20% { transform: translateX(-8px) rotate(-1deg); }
+  40% { transform: translateX(7px) rotate(1deg); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(3px); }
+}
+.tremble { animation: tremble .4s; }
+
+/* Clignement des yeux du logo */
+@keyframes cligne {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+.logo-cligne #Vector_3, .logo-cligne #Vector_4 {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cligne 4.5s infinite;
+}
+
+/* Flottement doux (bulles, pastilles) */
+@keyframes flotte {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.flotte { animation: flotte 4s ease-in-out infinite; }
+
+/* Bandeau défilant */
+@keyframes defile {
+  to { transform: translateX(-50%); }
+}
+.defile { animation: defile 80s linear infinite; }
+
+/* Vagues qui ondulent */
+.vague-defile { animation: defile linear infinite; }
+
+/* Pointillés du planning qui avancent */
+@keyframes fourmis { to { stroke-dashoffset: -52; } }
+.planning-fourmis { animation: fourmis 1.6s linear infinite; }
+
+/* Fentes qui sautent quand le code est bon */
+@keyframes saute {
+  0% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-22px) scale(1.08) rotate(-3deg); }
+  70% { transform: translateY(4px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Lettres « Rubik Glitch » : de temps en temps, un sursaut de piratage.
+   On anime `translate` (et pas `transform`) pour garder la rotation propre à chaque lettre. */
+@keyframes sursaut-glitch {
+  0%, 88%, 96%, 100% { translate: 0 0; text-shadow: none; }
+  89% { translate: -3px 1px; text-shadow: 3px 0 #F3C137, -3px 0 #D4D4D4; }
+  91% { translate: 3px -1px; text-shadow: -4px 0 #F3C137, 2px 0 #D4D4D4; }
+  93% { translate: -1px 0; text-shadow: 2px 0 #F3C137; }
+}
+.lettre-glitch { animation: sursaut-glitch 3.8s steps(1) infinite; }
+span:nth-child(odd) > .lettre-glitch, .lettre-glitch:nth-child(odd) { animation-duration: 5.3s; }
