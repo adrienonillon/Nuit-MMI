@@ -120,8 +120,8 @@ function useArticleActif(ids) {
 /* ---------------------------------------------------------------- héros */
 function Heros() {
   return (
-    <section aria-labelledby="t-reglement" className="mx-auto grid max-w-page items-center gap-10 px-4 pb-20 pt-6 md:px-[77px] lg:grid-cols-[1fr_440px]">
-      <div>
+    <section aria-labelledby="t-reglement" className="mx-auto max-w-page px-4 pb-20 pt-6 md:px-[77px]">
+      <div className="flex items-center justify-between gap-4">
         <motion.p
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -130,25 +130,46 @@ function Heros() {
         >
           Nuit MMI · Édition 2027
         </motion.p>
-        <h1 id="t-reglement" className="flex flex-col pt-10 md:pt-[58px]">
-          <span className="sr-only">Le règlement</span>
-          <span aria-hidden="true" className="-mt-8 block overflow-hidden pb-2 pt-8">
-            <motion.span
-              initial={{ y: '110%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
-              className="block font-outfit font-bold uppercase leading-[0.78] tracking-[-0.06em] text-encre"
-              style={{ fontSize: 'clamp(64px, 8vw, 115.2px)' }}
-            >
-              Le
-            </motion.span>
-          </span>
-          <span aria-hidden="true" className="mt-4 flex flex-wrap items-start"><MotDecoupe lettres={REGLEMENT} palette="accueil" gap={4} anime delai={0.55} /></span>
-        </h1>
-        <Apparition as="p" delai={1.1} className="mt-8 max-w-[560px] font-courier text-[16px] leading-[1.4] text-bleu md:text-[18px]">
+        <motion.p
+          initial={{ opacity: 0, scale: 1.6, rotate: 0 }}
+          animate={{ opacity: 1, scale: 1, rotate: -6 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 16, delay: 1.6 }}
+          className="hidden rounded-md border-2 border-bleu px-3 py-1 font-courier text-[15px] font-bold tracking-[2.23px] text-bleu sm:block md:text-[17px]"
+        >
+          LU & APPROUVÉ
+        </motion.p>
+      </div>
+      <h1 id="t-reglement" className="flex flex-col pt-10 md:pt-[58px]">
+        <span className="sr-only">Le règlement</span>
+        <span aria-hidden="true" className="-mt-8 block overflow-hidden pb-2 pt-8">
+          <motion.span
+            initial={{ y: '110%' }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
+            className="block font-outfit font-bold uppercase leading-[0.78] tracking-[-0.06em] text-encre"
+            style={{ fontSize: 'clamp(64px, 8vw, 115.2px)' }}
+          >
+            Le
+          </motion.span>
+        </span>
+        <span className="mt-4 flex flex-wrap items-center gap-6 md:gap-10">
+          <span aria-hidden="true" className="flex flex-wrap items-start"><MotDecoupe lettres={REGLEMENT} palette="accueil" gap={4} anime delai={0.55} /></span>
+          <motion.span
+            initial={{ scale: 0, rotate: -40 }}
+            animate={{ scale: 1, rotate: -10 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 1.4 }}
+            className="flex size-[96px] shrink-0 flex-col items-center justify-center rounded-full bg-jaune text-bleu shadow-[3px_5px_0_0_#0e0d12] md:size-[112px]"
+          >
+            <span className="font-shoulders text-[26px] font-black leading-none md:text-[30px]">{ARTICLES.length}</span>
+            <span className="font-courier text-[13px] font-bold md:text-[14px]">articles</span>
+          </motion.span>
+        </span>
+      </h1>
+      <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <Apparition as="p" delai={1.1} className="max-w-[640px] font-courier text-[16px] leading-[1.4] text-bleu md:text-[18px]">
           Tout ce qu’il faut savoir avant de passer 24 heures à créer sans dormir : qui peut participer, comment se forment les équipes, ce qu’il faut rendre et comment le jury tranche.
         </Apparition>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3, duration: 0.7, ease: EASE }} className="mt-10 flex flex-wrap gap-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3, duration: 0.7, ease: EASE }} className="flex shrink-0 flex-wrap gap-4">
           <a href="#articles" onClick={allerA('articles')} className="group flex items-center gap-[10px] rounded-lg bg-grisnoir px-[18px] py-[9px] font-courier text-[18px] font-bold text-jaune transition-colors hover:bg-bleu md:text-[20px]">
             Lire le règlement
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-1"><path d="M12 5v14m0 0-6-6m6 6 6-6" stroke="#F3C137" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -158,24 +179,6 @@ function Heros() {
           </Link>
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 80, rotate: 4 }}
-        animate={{ opacity: 1, y: 0, rotate: 0 }}
-        transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
-        className="relative mx-auto aspect-[440/520] w-full max-w-[440px] overflow-hidden rounded-b-[27px] rounded-t-[240px] bg-bleu"
-      >
-        <p className="absolute left-1/2 top-[8%] -translate-x-1/2 whitespace-nowrap font-courier text-[15px] font-bold tracking-[2.23px] text-jaune md:text-[17px]">LU & APPROUVÉ</p>
-        <motion.div
-          initial={{ scale: 0, rotate: -40 }}
-          animate={{ scale: 1, rotate: -10 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 1.4 }}
-          className="absolute bottom-[6%] right-[6%] flex size-[96px] flex-col items-center justify-center rounded-full bg-jaune text-bleu shadow-[3px_5px_0_0_#0e0d12] md:size-[112px]"
-        >
-          <span className="font-shoulders text-[26px] font-black leading-none md:text-[30px]">{ARTICLES.length}</span>
-          <span className="font-courier text-[13px] font-bold md:text-[14px]">articles</span>
-        </motion.div>
-      </motion.div>
     </section>
   )
 }
