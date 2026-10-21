@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="corps" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#C9C9C9"/>
+    </radialGradient>
+    <radialGradient id="oeil" cx="0.6" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#5A5A5A"/>
+      <stop offset="0.5" stop-color="#0E0D12"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#151147"/>
+  <path d="M13 44C15 40 16 36 16 30C16 20 23 14 32 14C41 14 48 20 48 30C48 36 49 40 51 44C53 47 56 48 57 49C55 51 51 52 47 50C43 48 39 50 35 51.5C33 52.2 31 52.2 29 51.5C25 50 21 48 17 50C13 52 9 51 7 49C8 48 11 47 13 44Z" fill="url(#corps)"/>
+  <ellipse cx="26" cy="29" rx="2.8" ry="2.1" fill="url(#oeil)"/>
+  <ellipse cx="38" cy="29" rx="2.8" ry="2.1" fill="url(#oeil)"/>
+</svg>
