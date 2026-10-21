@@ -73,7 +73,7 @@ function Heros() {
           transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
           className="relative mx-auto aspect-[626/632] w-full max-w-[626px] overflow-hidden rounded-b-[27px] rounded-t-[333px] bg-jaune"
         >
-          <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.6 }} className="absolute left-1/2 top-[6.7%] -translate-x-1/2 font-courier text-[15px] font-bold tracking-[2.23px] text-bleu md:text-[18px]">EN ÉQUIPE</motion.p>
+          <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.6 }} className="absolute inset-x-0 top-[6.7%] text-center font-courier text-[15px] font-bold tracking-[2.23px] text-bleu md:text-[18px]">EN ÉQUIPE</motion.p>
           <Suspense fallback={<img src={spookie} alt="" className="absolute left-[17.8%] top-[11.6%] h-[82.1%] w-[64.4%] object-contain object-bottom" />}>
             <Spookie3D className="absolute inset-x-0 bottom-[8%] top-[8%]" />
           </Suspense>

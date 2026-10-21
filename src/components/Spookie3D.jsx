@@ -50,13 +50,23 @@ function Fantome({ souris, prise }) {
     const temps = clock.getElapsedTime()
     const p = prise.current
 
-    // 1. Rotation : suit la souris, sauf pendant qu'on le fait tourner à la main.
-    //    Une fois lâché, il revient face à nous (au tour complet le plus proche).
-    if (!p.actif) p.angle = lisser(p.angle, Math.round(p.angle / UN_TOUR) * UN_TOUR, 2.5, dt)
+    // 1. Rotation : on le fait tourner à la main (gauche-droite = angle, haut-bas = inclinaison).
+    //    Lâché, il garde un peu d'élan, puis revient face à nous après 1,4 s sans bouger.
+    if (!p.actif) {
+      p.angle += p.elan * dt * 60
+      p.elan = lisser(p.elan, 0, 2.5, dt)
+      const auRepos = performance.now() - p.lacheA > 1400 && Math.abs(p.elan) < 0.003
+      if (auRepos) {
+        p.angle = lisser(p.angle, Math.round(p.angle / UN_TOUR) * UN_TOUR, 2.5, dt) // tour complet le plus proche
+        p.inclinaison = lisser(p.inclinaison, 0, 3, dt)
+      }
+    }
     pirouette.current.actuel = lisser(pirouette.current.actuel, pirouette.current.cible, 4, dt)
+    // Quand on ne le tient pas, il suit aussi la souris du regard.
     const suitLaSouris = p.actif ? 0 : 1
-    groupe.current.rotation.y = lisser(groupe.current.rotation.y, souris.current.x * 0.6 * suitLaSouris + p.angle + pirouette.current.actuel, p.actif ? 18 : 5, dt)
-    groupe.current.rotation.x = lisser(groupe.current.rotation.x, -souris.current.y * 0.18 * suitLaSouris, 5, dt)
+    const vitesse = p.actif ? 18 : 5
+    groupe.current.rotation.y = lisser(groupe.current.rotation.y, souris.current.x * 0.6 * suitLaSouris + p.angle + pirouette.current.actuel, vitesse, dt)
+    groupe.current.rotation.x = lisser(groupe.current.rotation.x, -souris.current.y * 0.18 * suitLaSouris + p.inclinaison, vitesse, dt)
 
     // 2. Flotte de haut en bas et se dandine.
     const flottement = animationsReduites ? 0 : Math.sin(temps * 1.4) * 0.14
@@ -102,7 +112,8 @@ function Fantome({ souris, prise }) {
 
 export default function Spookie3D({ className = '' }) {
   const souris = useRef({ x: 0, y: 0 })
-  const prise = useRef({ actif: false, angle: 0, distance: 0, dernierX: 0 })
+  // actif : on le tient · angle / inclinaison : rotation donnée à la main · elan : vitesse au moment du lâcher
+  const prise = useRef({ actif: false, angle: 0, inclinaison: 0, elan: 0, distance: 0, dernierX: 0, dernierY: 0, lacheA: 0 })
   const [tenu, setTenu] = useState(false)
 
   // Position de la souris sur toute la fenêtre, ramenée entre -1 et 1.
@@ -117,7 +128,7 @@ export default function Spookie3D({ className = '' }) {
 
   // Cliquer-glisser pour le faire tourner.
   const attraper = (e) => {
-    prise.current = { ...prise.current, actif: true, distance: 0, dernierX: e.clientX }
+    prise.current = { ...prise.current, actif: true, elan: 0, distance: 0, dernierX: e.clientX, dernierY: e.clientY }
     e.currentTarget.setPointerCapture?.(e.pointerId)
     setTenu(true)
   }
@@ -125,12 +136,18 @@ export default function Spookie3D({ className = '' }) {
     const p = prise.current
     if (!p.actif) return
     const dx = e.clientX - p.dernierX
+    const dy = e.clientY - p.dernierY
     p.dernierX = e.clientX
-    p.distance += Math.abs(dx)
+    p.dernierY = e.clientY
+    p.distance += Math.abs(dx) + Math.abs(dy)
     p.angle += dx * 0.012
+    p.inclinaison = THREE.MathUtils.clamp(p.inclinaison + dy * 0.006, -0.6, 0.6) // pas plus de ~35° vers le haut ou le bas
+    p.elan = dx * 0.012
   }
   const lacher = () => {
+    if (!prise.current.actif) return
     prise.current.actif = false
+    prise.current.lacheA = performance.now()
     setTenu(false)
   }
 
