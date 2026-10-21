@@ -27,6 +27,9 @@ export function oublierAcces() {
   try { sessionStorage.removeItem(CLE) } catch { /* stockage indisponible */ }
 }
 
-export function estDeverrouille() {
-  return codeTrouve().length > 0
+// Le code mémorisé est revérifié contre son empreinte : écrire n'importe quoi
+// dans le stockage du navigateur ne suffit pas à déverrouiller le site.
+export async function estDeverrouille() {
+  const code = codeTrouve()
+  return code.length > 0 && verifierCode(code)
 }

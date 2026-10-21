@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import SitePirate from './pages/SitePirate.jsx'
@@ -7,9 +7,16 @@ import Accueil from './pages/Accueil.jsx'
 import Reglement from './pages/Reglement.jsx'
 import { estDeverrouille } from './lib/acces.js'
 
-// La page restaurée n'est accessible qu'après le bon mot de passe.
+// Tout le site (restauré, accueil, règlement) n'est accessible qu'après le bon mot de passe.
 function AccesProtege({ children }) {
-  return estDeverrouille() ? children : <Navigate to="/" replace />
+  const [ok, setOk] = useState(null)
+  useEffect(() => {
+    let actif = true
+    estDeverrouille().then((v) => actif && setOk(v))
+    return () => { actif = false }
+  }, [])
+  if (ok === null) return null // vérification en cours (quelques millisecondes)
+  return ok ? children : <Navigate to="/" replace />
 }
 
 // Fondu entre les pages.
@@ -30,8 +37,8 @@ export default function App() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Page><SitePirate /></Page>} />
         <Route path="/restaure" element={<AccesProtege><Page><SiteRestaure /></Page></AccesProtege>} />
-        <Route path="/accueil" element={<Page><Accueil /></Page>} />
-        <Route path="/reglement" element={<Page><Reglement /></Page>} />
+        <Route path="/accueil" element={<AccesProtege><Page><Accueil /></Page></AccesProtege>} />
+        <Route path="/reglement" element={<AccesProtege><Page><Reglement /></Page></AccesProtege>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
