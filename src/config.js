@@ -1,7 +1,7 @@
 // ===== Réglages faciles à modifier =====
 
 // Date et heure de la Nuit MMI (fin du compte à rebours).
-export const EVENEMENT = new Date('2027-01-28T19:00:00+01:00')
+export const EVENEMENT = new Date('2027-01-07T09:00:00+01:00')
 
 // Nombre de lettres du mot de passe (une fente par lettre).
 export const LONGUEUR_CODE = 11
