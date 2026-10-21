@@ -9,7 +9,6 @@ import { MotDecoupe } from '../components/LettreDecoupee.jsx'
 import { REGLEMENT, ARTICLES as LETTRES_ARTICLES } from '../data/lettres.js'
 import { EVENEMENT } from '../config.js'
 import { formatDateLongue } from '../lib/useCompteARebours.js'
-import spookie from '../assets/photos/spookie.png'
 
 // ===== Contenu du règlement (à faire valider par l'équipe organisatrice) =====
 const ARTICLES = [
@@ -167,7 +166,6 @@ function Heros() {
         className="relative mx-auto aspect-[440/520] w-full max-w-[440px] overflow-hidden rounded-b-[27px] rounded-t-[240px] bg-bleu"
       >
         <p className="absolute left-1/2 top-[8%] -translate-x-1/2 whitespace-nowrap font-courier text-[15px] font-bold tracking-[2.23px] text-jaune md:text-[17px]">LU & APPROUVÉ</p>
-        <img src={spookie} alt="" className="absolute inset-x-[10%] bottom-[12%] top-[16%] object-contain" />
         <motion.div
           initial={{ scale: 0, rotate: -40 }}
           animate={{ scale: 1, rotate: -10 }}
