@@ -44,7 +44,7 @@ export default function EnTete() {
           <Link to="/accueil" className="logo-cligne group flex items-start" aria-label="Nuit MMI 2027 — accueil">
             <Logo
               annee={null}
-              className={`transition-all duration-300 group-hover:-rotate-3 group-hover:scale-105 ${compacte ? 'h-[36px] w-[71px]' : 'h-[44px] w-[87px] md:h-[60px] md:w-[119px]'}`}
+              className={`origin-bottom-left transition-[width,height,transform] duration-300 will-change-transform group-hover:scale-105 ${compacte ? 'h-[36px] w-[71px]' : 'h-[44px] w-[87px] md:h-[60px] md:w-[119px]'}`}
             />
             <span className={`-ml-2 font-inter font-black leading-none text-jaune transition-all duration-300 ${compacte ? 'text-[10px]' : 'text-[11px] md:text-[14px]'}`}>2027</span>
           </Link>
