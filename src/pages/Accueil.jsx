@@ -7,11 +7,11 @@ import Vague from '../components/Vague.jsx'
 import CanevasAEchelle from '../components/CanevasAEchelle.jsx'
 import { MotDecoupe } from '../components/LettreDecoupee.jsx'
 import { SANS, DORMIR, INDICATIF, VINGT_QUATRE, HEURES, IDEES, PRERATION } from '../data/lettres.js'
-import spookie from '../assets/photos/spookie.png'
-import photoObserver from '../assets/photos/consigne.png'
-import photoImaginer from '../assets/photos/equipe.png'
-import photoFabriquer from '../assets/photos/fabriquer.png'
-import photoDefendre from '../assets/photos/defendre.png'
+import spookie from '../assets/photos/spookie.webp'
+import photoObserver from '../assets/photos/consigne.webp'
+import photoImaginer from '../assets/photos/equipe.webp'
+import photoFabriquer from '../assets/photos/fabriquer.webp'
+import photoDefendre from '../assets/photos/defendre.webp'
 
 // three.js est lourd : le fantôme 3D est chargé à part.
 const Spookie3D = lazy(() => import('../components/Spookie3D.jsx'))

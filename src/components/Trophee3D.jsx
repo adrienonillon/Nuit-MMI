@@ -1,8 +1,9 @@
-import { Component, Suspense, useEffect, useMemo, useRef } from 'react'
+import { Suspense, useEffect, useMemo, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
+import Secours3D from './Secours3D.jsx'
 import modele from '../assets/photos/Trophée.glb'
 
 // Reflets pour les matières métal / or (sans environnement, l'or paraît noir).
@@ -49,18 +50,13 @@ function Trophee() {
   )
 }
 
-class Secours extends Component {
-  state = { erreur: false }
-  static getDerivedStateFromError() { return { erreur: true } }
-  render() { return this.state.erreur ? null : this.props.children }
-}
-
 export default function Trophee3D({ className = '' }) {
   return (
     <div className={className}>
-      <Secours>
+      <Secours3D>
         <Suspense fallback={null}>
-          <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0.4, 6], fov: 35 }} gl={{ antialias: true, alpha: true }}>
+          {/* Le trophée est affiché flouté : inutile de le calculer en haute définition (dpr 1) */}
+          <Canvas dpr={1} camera={{ position: [0, 0.4, 6], fov: 35 }} gl={{ antialias: false, alpha: true }}>
             <Environnement />
             <ambientLight intensity={0.6} />
             <directionalLight position={[3, 5, 4]} intensity={2.5} />
@@ -68,7 +64,7 @@ export default function Trophee3D({ className = '' }) {
             <Trophee />
           </Canvas>
         </Suspense>
-      </Secours>
+      </Secours3D>
     </div>
   )
 }

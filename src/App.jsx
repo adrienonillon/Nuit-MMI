@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import SitePirate from './pages/SitePirate.jsx'
-import SiteRestaure from './pages/SiteRestaure.jsx'
-import Accueil from './pages/Accueil.jsx'
-import Reglement from './pages/Reglement.jsx'
-import Projets from './pages/Projets.jsx'
 import { estDeverrouille } from './lib/acces.js'
+
+// Les pages protégées ne sont téléchargées qu'au moment où on les ouvre :
+// la première page (site piraté) s'affiche donc plus vite.
+const SiteRestaure = lazy(() => import('./pages/SiteRestaure.jsx'))
+const Accueil = lazy(() => import('./pages/Accueil.jsx'))
+const Reglement = lazy(() => import('./pages/Reglement.jsx'))
+const Projets = lazy(() => import('./pages/Projets.jsx'))
 
 // Tout le site (restauré, accueil, projets, règlement) n'est accessible qu'après le bon mot de passe.
 function AccesProtege({ children }) {
@@ -25,7 +28,7 @@ function AccesProtege({ children }) {
 function Page({ children, sortieDirecte = false }) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: sortieDirecte ? 0 : 0.18 } }} transition={{ duration: 0.18 }}>
-      {children}
+      <Suspense fallback={null}>{children}</Suspense>
     </motion.div>
   )
 }

@@ -8,5 +8,6 @@ export default defineConfig(({ mode }) => ({
   base: './',
   // Modèles 3D (Spookie)
   assetsInclude: ['**/*.glb'],
-  build: mode === 'single' ? { outDir: 'dist-single', assetsInlineLimit: 100000000 } : {},
+  // three.js (la 3D) pèse ~870 Ko à lui seul : il est chargé à part, seulement sur l'accueil.
+  build: mode === 'single' ? { outDir: 'dist-single', assetsInlineLimit: 100000000 } : { chunkSizeWarningLimit: 900 },
 }))
