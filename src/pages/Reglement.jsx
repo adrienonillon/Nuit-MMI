@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import EnTete from '../components/EnTete.jsx'
@@ -10,8 +10,6 @@ import { REGLEMENT, ARTICLES as LETTRES_ARTICLES } from '../data/lettres.js'
 import { EVENEMENT } from '../config.js'
 import { formatDateLongue } from '../lib/useCompteARebours.js'
 import spookie from '../assets/photos/spookie.png'
-
-const Spookie3D = lazy(() => import('../components/Spookie3D.jsx'))
 
 // ===== Contenu du règlement (à faire valider par l'équipe organisatrice) =====
 const ARTICLES = [
@@ -169,9 +167,7 @@ function Heros() {
         className="relative mx-auto aspect-[440/520] w-full max-w-[440px] overflow-hidden rounded-b-[27px] rounded-t-[240px] bg-bleu"
       >
         <p className="absolute left-1/2 top-[8%] -translate-x-1/2 whitespace-nowrap font-courier text-[15px] font-bold tracking-[2.23px] text-jaune md:text-[17px]">LU & APPROUVÉ</p>
-        <Suspense fallback={<img src={spookie} alt="" className="absolute inset-x-[10%] bottom-[12%] top-[16%] object-contain" />}>
-          <Spookie3D className="absolute inset-x-0 bottom-[10%] top-[12%]" />
-        </Suspense>
+        <img src={spookie} alt="" className="absolute inset-x-[10%] bottom-[12%] top-[16%] object-contain" />
         <motion.div
           initial={{ scale: 0, rotate: -40 }}
           animate={{ scale: 1, rotate: -10 }}
