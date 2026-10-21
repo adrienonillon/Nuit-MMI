@@ -73,12 +73,25 @@ export function LogoVandalise({ rire = 0 }) {
 }
 
 export function Fentes({ valeurs, setValeurs, refs, tremble, verrouille = false }) {
-  const majLettre = (i, v) => {
-    const l = v.replace(/[^a-zA-ZÀ-ÿ]/g, '').slice(-1).toUpperCase()
+  const LETTRE = /^[a-zA-ZÀ-ÿ]$/
+  const poser = (i, l) => {
     const n = [...valeurs]; n[i] = l; setValeurs(n)
     if (l && i < LONGUEUR_CODE - 1) refs.current[i + 1]?.focus()
   }
+  // Repli (claviers mobiles) : on garde la lettre nouvellement tapée, que le curseur
+  // soit avant ou après l'ancienne lettre de la case.
+  const majLettre = (i, v) => {
+    const lettres = v.replace(/[^a-zA-ZÀ-ÿ]/g, '').toUpperCase()
+    const nouvelle = lettres.length > 1 && lettres[0] !== valeurs[i] ? lettres[0] : lettres.slice(-1)
+    poser(i, nouvelle)
+  }
   const touche = (i, e) => {
+    // Une lettre tapée remplace toujours celle de la case
+    if (!verrouille && LETTRE.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault()
+      poser(i, e.key.toUpperCase())
+      return
+    }
     if (e.key === 'Backspace' && !valeurs[i] && i > 0) { const n = [...valeurs]; n[i - 1] = ''; setValeurs(n); refs.current[i - 1]?.focus(); e.preventDefault() }
     if (e.key === 'ArrowLeft' && i > 0) refs.current[i - 1]?.focus()
     if (e.key === 'ArrowRight' && i < LONGUEUR_CODE - 1) refs.current[i + 1]?.focus()
@@ -110,6 +123,7 @@ export function Fentes({ valeurs, setValeurs, refs, tremble, verrouille = false 
             onChange={(e) => majLettre(i, e.target.value)}
             onKeyDown={(e) => touche(i, e)}
             onPaste={coller}
+            onFocus={(e) => e.target.select()}
             className={`aspect-[3/4] min-w-0 max-w-[96px] flex-1 rounded-[2px] p-0 text-center leading-none caret-bleu outline-none transition-transform ${
               verrouille
                 ? 'bg-bleu font-shoulders font-black text-jaune shadow-[2px_3px_0_0_rgba(13,13,18,0.25)]'
@@ -164,6 +178,8 @@ export default function SitePirate() {
     setEssais(essais + 1)
     setTremble(false)
     requestAnimationFrame(() => setTremble(true))
+    // Le curseur revient dans la première case pour retaper directement
+    setTimeout(() => refs.current[0]?.focus(), 400)
   }
 
   const unites = [
