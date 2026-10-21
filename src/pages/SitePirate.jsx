@@ -178,8 +178,13 @@ export default function SitePirate() {
     setEssais(essais + 1)
     setTremble(false)
     requestAnimationFrame(() => setTremble(true))
-    // Le curseur revient dans la première case pour retaper directement
-    setTimeout(() => refs.current[0]?.focus(), 400)
+    // Les lettres « hackées » restent un instant, puis le code est effacé
+    // et le curseur revient dans la première case pour retaper directement
+    setTimeout(() => {
+      setValeurs(Array(LONGUEUR_CODE).fill(''))
+      setTremble(false)
+      refs.current[0]?.focus()
+    }, 700)
   }
 
   const unites = [
